@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>{title}-{dbName}</title>
+  <title>{title} ({dbName})</title>
 </svelte:head>
 
 <AnswerForm {db} {title} {dbName}/>
