@@ -5,6 +5,7 @@
 
   export let db: QuizDatabase
   export let title: string
+  export let dbName: string
 
   let quiz: Quiz = null
 
@@ -16,9 +17,14 @@
 </script>
 
 <Card>
-  <CardHeader>{title}</CardHeader>
+  <CardHeader>
+    <Row class="row-cols-auto">
+      <Col class="pe-0">{title}</Col>
+      <Col>({dbName})</Col>
+    </Row>
+  </CardHeader>
   <CardBody>
-    <p class="text-center">
+    <p class="text-center mb-0">
       {quiz?.text || "現在は出題されていません。"}
     </p>
     {#if quiz}

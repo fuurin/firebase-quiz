@@ -12,6 +12,7 @@
 
   export let db: QuizDatabase
   export let title: string
+  export let dbName: string
 
   let quizText: string = "私達の会社はどちらでしょう？"
   let quizOptions: Array<Object> = [
@@ -35,13 +36,18 @@
 </script>
 
 <Card>
-  <CardHeader>{title}</CardHeader>
+  <CardHeader>
+    <Row class="row-cols-auto">
+      <Col class="pe-0">{title}</Col>
+      <Col>({dbName})</Col>
+    </Row>
+  </CardHeader>
   <ListGroup>
     <ListGroupItem>
       <Form class="mt-2">
         <FormGroup>
           <Label>クイズのテキスト</Label>
-          <Input bind:value={quizText} />
+          <Input type="textarea" bind:value={quizText} />
         </FormGroup>
         {#each quizOptions as option, i}
           <FormGroup>

@@ -2,11 +2,12 @@
   import db from "$firebase/firestore/quiz"
   import QuestionForm from "$components/question_form.svelte"
 
-  const title: string = "出題者用ページ (Cloud Firestore)"
+  const title: string = "出題者用ページ"
+  const dbName: string = "Cloud Firestore"
 </script>
 
 <svelte:head>
-  <title>{title}</title>
+  <title>{title} ({dbName})</title>
 </svelte:head>
 
-<QuestionForm {db} {title} />
+<QuestionForm {db} {title} {dbName}/>
