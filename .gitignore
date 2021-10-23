@@ -1,0 +1,16 @@
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+/public
+
+# Firebase settings files are ignored. 
+# Build your own Firebase resources.
+src/firebase/app.ts
+.firebaserc
+database.rules.json
+firebase-debug.log
+firebase.json
+firestore.indexes.json
+firestore.rules
