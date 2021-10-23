@@ -30,7 +30,7 @@ class FirestoreQuizDatabase implements QuizDatabase {
       const quiz = quizData ? new Quiz(
         quizData.text,
         quizData.options.map((option: Object) => {
-          new QuizOption(option["text"], option["isAnswer"])
+          return new QuizOption(option["text"], option["isAnswer"])
         })
       ) : null
       callback(quiz)

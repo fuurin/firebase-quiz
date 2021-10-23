@@ -17,12 +17,9 @@ const config = {
 		
 		vite: {
 			// Refer: https://github.com/firebase/firebase-js-sdk/issues/5140
-			// ssr: {
-			// 	 external: ['firebase']
-			// },
-
-			// Refer: https://kit.svelte.dev/faq#how-do-i-use-x-with-sveltekit-how-do-i-use-firebase
-			ssr: false,
+			ssr: {
+				 external: ['firebase']
+			},
 
 			// Refer: https://dev.to/danawoodman/how-to-add-module-import-aliases-in-sveltekit-2ck
 			resolve: {
