@@ -14,10 +14,10 @@
       <p>Cloud Firestore</p>
       <Row class="text-center">
         <Col md=6 xs=12 class="pb-2">
-          <a href="firestore/question" class="btn btn-info">出題者</a>
+          <a sveltekit:prefetch href="firestore/question" class="btn btn-info">出題者</a>
         </Col>
         <Col md=6 xs=12 class="pb-2">
-          <a href="firestore/answer" class="btn btn-success">解答者</a>
+          <a sveltekit:prefetch href="firestore/answer" class="btn btn-success">解答者</a>
         </Col>
       </Row>  
     </ListGroupItem>
@@ -25,10 +25,10 @@
       <p>Realtime Database</p>
       <Row class="text-center">
         <Col md=6 xs=12 class="pb-2">
-          <a href="realtime/question" class="btn btn-info">出題者</a>
+          <a sveltekit:prefetch href="realtime/question" class="btn btn-info">出題者</a>
         </Col>
         <Col md=6 xs=12 class="pb-2">
-          <a href="realtime/answer" class="btn btn-success">解答者</a>
+          <a sveltekit:prefetch href="realtime/answer" class="btn btn-success">解答者</a>
         </Col>
       </Row>
     </ListGroupItem>

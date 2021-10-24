@@ -29,7 +29,12 @@ const config = {
 					$firebase: resolve('./src/firebase'),
 					$interfaces: resolve('./src/interfaces')
 				}
-			}
+			},
+
+			build: {
+				// vendorファイル(主にfirestoreとrealtime db)が500kbを超えてしまう...どうにかして小さくできないか...？
+				chunkSizeWarningLimit: 1000,
+			},
 		}
 	}
 };
