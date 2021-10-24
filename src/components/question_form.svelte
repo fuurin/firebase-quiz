@@ -8,6 +8,7 @@
            InputGroup, InputGroupText,
            ListGroup, ListGroupItem,
   } from "sveltestrap"
+import { onMount } from "svelte";
 
   export let db: QuizDatabase
 
@@ -17,7 +18,14 @@
     { text: "Glossam", isAnswer: false }
   ]
 
-  const handleError = (error) => {
+  onMount(async () => {
+    const currentQuiz = await db.getQuiz()
+    if (!currentQuiz) return
+    quizText = currentQuiz.text
+    quizOptions = currentQuiz.options.map(option => option.getObject())
+  })
+
+  const handleError = (error: Error) => {
     alert("エラーが発生しました...")
     console.error(error)
   }
@@ -35,7 +43,7 @@
     }
   }
 
-  const quizEnd = async () => {    
+  const quizEnd = async () => {
     try {
       await db.deleteQuiz()
       alert("出題を終了しました！")

@@ -1,8 +1,8 @@
-import type { Firestore, DocumentReference } from "@firebase/firestore"
+import type { Firestore, DocumentReference, DocumentData } from "@firebase/firestore"
 import type QuizDatabase from "$interfaces/QuizDatabase"
 
 import db from "./db"
-import { doc, setDoc, deleteDoc, onSnapshot } from "firebase/firestore"
+import { doc, setDoc, getDoc, deleteDoc, onSnapshot } from "firebase/firestore"
 import Quiz from "$classes/quiz"
 import QuizOption from "$classes/quiz_option"
 
@@ -19,6 +19,11 @@ class FirestoreQuizDatabase implements QuizDatabase {
   setQuiz = async (quiz: Quiz) => {
     await setDoc(this.quizDoc, quiz.getObject())
   }
+
+  getQuiz = async () => {
+    const quizData = (await getDoc(this.quizDoc)).data()
+    return quizData ? this.makeQuizFromData(quizData) : null
+  }
   
   deleteQuiz = async () => {
     await deleteDoc(this.quizDoc)
@@ -27,14 +32,17 @@ class FirestoreQuizDatabase implements QuizDatabase {
   onQuizUpdated = (callback: (quiz: Quiz) => void) => {
     onSnapshot(this.quizDoc, (snapshot) => {
       const quizData = snapshot.data()
-      const quiz = quizData ? new Quiz(
-        quizData.text,
-        quizData.options.map((option: Object) => {
-          return new QuizOption(option["text"], option["isAnswer"])
-        })
-      ) : null
-      callback(quiz)
+      callback(quizData ? this.makeQuizFromData(quizData) : null)
     })
+  }
+
+  private makeQuizFromData(quizData: DocumentData): Quiz {
+    return new Quiz(
+      quizData.text,
+      quizData.options.map((option: Object) => {
+        return new QuizOption(option["text"], option["isAnswer"])
+      })
+    )
   }
 }
 

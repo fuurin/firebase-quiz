@@ -4,7 +4,7 @@
   import { currentUser } from '$stores/current_user_store'
   import { Navbar, NavbarBrand, Image, Nav, NavItem, Button } from "sveltestrap"
 
-  export let isCurrentUserChecked
+  export let isCurrentUserChecked: boolean
 
   const openLogin = () => signInWithRedirect(auth, new GoogleAuthProvider())
 </script>

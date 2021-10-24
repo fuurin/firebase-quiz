@@ -2,7 +2,7 @@ import type { Database, DatabaseReference } from "firebase/database"
 import type QuizDatabase from "$interfaces/QuizDatabase"
 
 import db from "./db"
-import { ref, set, remove, onValue } from "firebase/database"
+import { ref, set, get, remove, onValue } from "firebase/database"
 import Quiz from "$classes/quiz"
 import QuizOption from "$classes/quiz_option"
 
@@ -18,6 +18,11 @@ class RealtimeQuizDatabase implements QuizDatabase {
   setQuiz = async (quiz: Quiz) => {
     await set(this.quizRef, quiz.getObject())
   }
+
+  getQuiz = async () => {
+    const quizData = (await get(this.quizRef)).val()
+    return quizData ? this.makeQuizFromData(quizData) : null
+  }
   
   deleteQuiz = async () => {
     await remove(this.quizRef)
@@ -26,14 +31,17 @@ class RealtimeQuizDatabase implements QuizDatabase {
   onQuizUpdated = (callback: (quiz: Quiz) => void) => {
     onValue(this.quizRef, (snapshot) => {
       const quizData = snapshot.val()
-      const quiz = quizData ? new Quiz(
-        quizData.text,
-        quizData.options.map((option: Object) => {
-          return new QuizOption(option["text"], option["isAnswer"])
-        })
-      ) : null
-      callback(quiz)
+      callback(quizData ? this.makeQuizFromData(quizData) : null)
     })
+  }
+
+  private makeQuizFromData(quizData: Object): Quiz {
+    return new Quiz(
+      quizData["text"],
+      quizData["options"].map((option: Object) => {
+        return new QuizOption(option["text"], option["isAnswer"])
+      })
+    )
   }
 }
 
