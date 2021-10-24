@@ -1,13 +1,11 @@
 <script lang="ts">
+  import { requireLogin } from "$stores/current_user_store"
+  import { setTitle } from "$stores/title_store"
   import db from "$firebase/firestore/quiz"
   import QuestionForm from "$components/question_form.svelte"
 
-  const title: string = "出題者用ページ"
-  const dbName: string = "Cloud Firestore"
+  requireLogin()
+  setTitle("出題者用ページ (Firestore)")
 </script>
 
-<svelte:head>
-  <title>{title} ({dbName})</title>
-</svelte:head>
-
-<QuestionForm {db} {title} {dbName}/>
+<QuestionForm {db} />

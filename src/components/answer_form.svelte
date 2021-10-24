@@ -1,11 +1,10 @@
 <script lang="ts">
   import type QuizDatabase from "$interfaces/QuizDatabase";
   import type Quiz from "$classes/quiz"
-  import { Button, Card, CardBody, CardHeader, Row, Col } from "sveltestrap"
 
+  import { Button, CardBody, Row, Col } from "sveltestrap"
+ 
   export let db: QuizDatabase
-  export let title: string
-  export let dbName: string
 
   let quiz: Quiz = null
 
@@ -16,27 +15,19 @@
   }
 </script>
 
-<Card>
-  <CardHeader>
-    <Row class="row-cols-auto">
-      <Col class="pe-0">{title}</Col>
-      <Col>({dbName})</Col>
+<CardBody>
+  {#if quiz}
+    <p class="text-center">{quiz.text}</p>
+    <Row class="text-center">
+      {#each quiz.options as option }
+        <Col md=6 xs=12 class="py-2">
+          <Button color="info" on:click={() => answer(option.isAnswer)}>
+            {option.text}
+          </Button>
+        </Col>
+      {/each}
     </Row>
-  </CardHeader>
-  <CardBody>
-    <p class="text-center mb-0">
-      {quiz?.text || "現在は出題されていません。"}
-    </p>
-    {#if quiz}
-      <Row class="text-center">
-        {#each quiz.options as option }
-          <Col md=6 xs=12 class="py-2">
-            <Button color="info" on:click={() => answer(option.isAnswer)}>
-              {option.text}
-            </Button>
-          </Col>
-        {/each}
-      </Row>
-    {/if}
-  </CardBody>
-</Card>
+  {:else}
+    <p class="text-center pb-0">現在は出題されていません。</p>
+  {/if}
+</CardBody>
