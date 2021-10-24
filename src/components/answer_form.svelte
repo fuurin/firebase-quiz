@@ -2,6 +2,7 @@
   import type QuizDatabase from "$interfaces/QuizDatabase";
   import type Quiz from "$classes/quiz"
   import { Button, Card, CardBody, CardHeader, Row, Col } from "sveltestrap"
+  import { onMount } from 'svelte'
 
   export let db: QuizDatabase
   export let title: string
@@ -9,7 +10,9 @@
 
   let quiz: Quiz = null
 
-  db.onQuizUpdated((updatedQuiz) => quiz = updatedQuiz)
+  onMount(() => {
+    db.onQuizUpdated((updatedQuiz) => quiz = updatedQuiz)
+  })
 
   const answer = async (isAnswer: boolean) => {
     alert(isAnswer ? "正解！" : "不正解...")
