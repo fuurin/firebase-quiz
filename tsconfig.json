@@ -27,7 +27,8 @@
 			"$classes/*": ["src/classes/*"],
 			"$components/*": ["src/components/*"],
 			"$firebase/*": ["src/firebase/*"],
-			"$interfaces/*": ["src/interfaces/*"]
+			"$interfaces/*": ["src/interfaces/*"],
+			"$stores/*": ["src/stores/*"]
 		}
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]

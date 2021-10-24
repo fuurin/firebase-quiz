@@ -27,7 +27,8 @@ const config = {
 					$classes: resolve('./src/classes'),
 					$components: resolve('./src/components'),
 					$firebase: resolve('./src/firebase'),
-					$interfaces: resolve('./src/interfaces')
+					$interfaces: resolve('./src/interfaces'),
+					$stores: resolve('./src/stores')
 				}
 			},
 
