@@ -9,13 +9,10 @@
            ListGroup, ListGroupItem,
            Row, Col
   } from "sveltestrap"
-  import { onMount } from 'svelte'
 
   export let db: QuizDatabase
   export let title: string
   export let dbName: string
-  let quizStart
-  let quizEnd
 
   let quizText: string = "私達の会社はどちらでしょう？"
   let quizOptions: Array<Object> = [
@@ -23,21 +20,19 @@
     { text: "Glossam", isAnswer: false }
   ]
 
-  onMount(() => {
-    quizStart = async () => {
-      const quiz = new Quiz(
-        quizText,
-        quizOptions.map(option => new QuizOption(option["text"], option["isAnswer"]))
-      )
-      db.setQuiz(quiz)
-      alert("出題しました！")
-    }
+  const quizStart = async () => {
+    const quiz = new Quiz(
+      quizText,
+      quizOptions.map(option => new QuizOption(option["text"], option["isAnswer"]))
+    )
+    db.setQuiz(quiz)
+    alert("出題しました！")
+  }
 
-    quizEnd = async () => {
-      db.deleteQuiz()
-      alert("出題を終了しました！")
-    }
-  })
+  const quizEnd = async () => {
+    db.deleteQuiz()
+    alert("出題を終了しました！")
+  }
 </script>
 
 <Card>
