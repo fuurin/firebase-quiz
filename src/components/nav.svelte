@@ -1,12 +1,12 @@
 <script lang="ts">
   import auth from '$firebase/auth'
-  import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth"
+  import { signInWithPopup, GoogleAuthProvider } from "firebase/auth"
   import { currentUser } from '$stores/current_user_store'
   import { Navbar, NavbarBrand, Image, Nav, NavItem, Button } from "sveltestrap"
 
   export let isCurrentUserChecked: boolean
 
-  const openLogin = () => signInWithRedirect(auth, new GoogleAuthProvider())
+  const openLogin = () => signInWithPopup(auth, new GoogleAuthProvider())
 </script>
 
 <Navbar color="primary" light class="text-white" expand="md">
